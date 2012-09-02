@@ -7,28 +7,6 @@ namespace UnitTests
     [TestClass]
     public class FormatChecks
     {
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
         [TestMethod]
         public void PostalCodeFormatCheck()
         {
@@ -79,21 +57,37 @@ namespace UnitTests
             Assert.AreEqual(false, Validator.CheckPhoneNumber("1", PhoneFormat.Japan));
             Assert.AreEqual(false, Validator.CheckPhoneNumber("123456", PhoneFormat.Japan));
 
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("234-14242424", PhoneFormat.China));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("555-383-3344", PhoneFormat.America));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("493 3227341", PhoneFormat.India));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("972-367087", PhoneFormat.Spain));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("+44 333 333 333", PhoneFormat.UnitedKingdom));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("(23)343-4343", PhoneFormat.Brazil));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("+31(0)235256677", PhoneFormat.Dutch));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("(02)12341234", PhoneFormat.Australia));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("2342523452", PhoneFormat.Israel));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("(038)8383748", PhoneFormat.NewZealand));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("+7(916)9985670", PhoneFormat.Russia));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("22737458", PhoneFormat.Invariant));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("023-55116", PhoneFormat.Sweden));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("3486543653", PhoneFormat.Italy));
-            //Assert.AreEqual(true, Validator.CheckPhoneNumber("20293822", PhoneFormat.Denmark));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("234-14242424", PhoneFormat.China));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("(999)99999999", PhoneFormat.China));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("999-99999999", PhoneFormat.China));
+
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("555-383-3344", PhoneFormat.America));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("1-234-567-8901 91234", PhoneFormat.America));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("12345678901", PhoneFormat.America));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("1 (234) 567-8901", PhoneFormat.America));
+
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("99999-999999", PhoneFormat.India));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("9999-9999999", PhoneFormat.India));
+
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("972-367087", PhoneFormat.Spain));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("999999999", PhoneFormat.Spain));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("99-9999999", PhoneFormat.Spain));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("999-999999", PhoneFormat.Spain));
+
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("+44 333 333 333", PhoneFormat.UnitedKingdom));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("(23)343-4343", PhoneFormat.Brazil));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("+31(0)235256677", PhoneFormat.Dutch));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("(02)12341234", PhoneFormat.Australia));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("2342523452", PhoneFormat.Israel));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("(038)8383748", PhoneFormat.NewZealand));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("+7(916)9985670", PhoneFormat.Russia));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("22737458", PhoneFormat.Invariant));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("023-55116", PhoneFormat.Sweden));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("3486543653", PhoneFormat.Italy));
+            
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("20293822", PhoneFormat.Denmark));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("+45 20293822", PhoneFormat.Denmark));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("45 20293822", PhoneFormat.Denmark));
         }
 
         [TestMethod]
@@ -108,22 +102,22 @@ namespace UnitTests
         [TestMethod]
         public void CheckURI()
         {
-            Assert.AreEqual(true, Validator.CheckUri("http://ianqvist.dk/"));
-            Assert.AreEqual(true, Validator.CheckUri("http://ianqvist.com"));
-            Assert.AreEqual(true, Validator.CheckUri("http://ianqvist.dk/page.aspx"));
-            Assert.AreEqual(true, Validator.CheckUri("http://ianqvist.dk/page.aspx?var=value"));
-            Assert.AreEqual(true, Validator.CheckUri("http://ianqvist.dk/page.aspx?var=value&var2=value2"));
-            Assert.AreEqual(true, Validator.CheckUri("http://www.ianqvist.dk/"));
-            Assert.AreEqual(false, Validator.CheckUri("contoso.com/path???/file"));
+            Assert.AreEqual(true, Validator.CheckUri("http://google.net/"));
+            Assert.AreEqual(true, Validator.CheckUri("http://google.com"));
+            Assert.AreEqual(true, Validator.CheckUri("http://google.com/page.aspx"));
+            Assert.AreEqual(true, Validator.CheckUri("http://google.com/page.aspx?var=value"));
+            Assert.AreEqual(true, Validator.CheckUri("http://google.com/page.aspx?var=value&var2=value2"));
+            Assert.AreEqual(true, Validator.CheckUri("http://www.google.com/"));
+            Assert.AreEqual(false, Validator.CheckUri("google.com/path???/file"));
         }
 
         [TestMethod]
         public void CheckEmail()
         {
-            Assert.AreEqual(true, Validator.CheckEmail("ian@qvist.dk"));
+            Assert.AreEqual(true, Validator.CheckEmail("ian@google.com"));
             Assert.AreEqual(true, Validator.CheckEmail("a1@a.aa"));
-            Assert.AreEqual(false, Validator.CheckEmail("@ad.dk"));
-            Assert.AreEqual(false, Validator.CheckEmail("asd@.dk"));
+            Assert.AreEqual(false, Validator.CheckEmail("@ad.com"));
+            Assert.AreEqual(false, Validator.CheckEmail("asd@.com"));
             Assert.AreEqual(false, Validator.CheckEmail("asd@asd."));
         }
     }
