@@ -1,0 +1,44 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validator.NET", "Validator.NET\Validator.NET.csproj", "{243023F8-0F0D-44AB-820F-3F3C32E5D767}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767} = {243023F8-0F0D-44AB-820F-3F3C32E5D767}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|.NET = Release|.NET
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Debug|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Debug|Mixed Platforms.Build.0 = Release|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Release|.NET.ActiveCfg = Release|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{243023F8-0F0D-44AB-820F-3F3C32E5D767}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Release|.NET.ActiveCfg = Release|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{88A1209E-72D7-4F35-BF0E-453F4B79F4F4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
