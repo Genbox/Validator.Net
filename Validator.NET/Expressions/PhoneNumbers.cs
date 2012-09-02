@@ -2,14 +2,14 @@
 {
     public static class PhoneNumbers
     {
-        // French phone number. Format: 0x xx xx xx xx
-        public const string France = @"(0( \d|\d ))?\d\d[\ ]?\d\d[\ ]?\d\d[\ ]?\d\d";
+        // French phone number. Format: 0x xx xx xx xx | 0xxx xxx xxx | +262 xxx xxx xxx
+        public const string France = @"^\+?(?:(?:[\d -]{3})|(?:0\d))(?:[ -]?\d){8,9}$";
 
-        // German phone number. Format: (0xx)xx xx xx
-        public const string Germany = @"((\(0\d\d\) |(\(0\d{3}\) )?\d )?\d\d\ \d\d\ \d\d|\(0\d{4}\)\ \d\ \d\d-\d\d?)";
+        // German phone number. Format: (0xx)xx xx xx | +49 (0) 123 456789
+        public const string Germany = @"^(?:[\+][0-9]{1,3}[ \.\-])?(?:[\(]{1}[0-9]{1,6}[\)])?(?:[0-9 \.\-\/]{3,20})(?:(?:x|ext|extension)[ ]?[0-9]{1,4})?$";
 
-        // Japanese phone number. Format: 0x-xxxx-xxxx
-        public const string Japan = @"(0\d{1,4}-|\(0\d{1,4}\) ?)?\d{1,4}-\d{4}";
+        // Japanese phone number. Format: 0x-xxxx-xxxx | 011-81-3-9999-9999 | +81-3-9999-9999
+        public const string Japan = @"^\+?(?:\d{1,3}-?\d{1,2}-?\d?|0\d{1,4}|\(0\d{1,4}\))?[ -]?[\d -]{8,14}$";
 
         // Chinese phone number. Format: (xxx)xxxxxxxx or xxx-xxxxxxxx
         public const string China = @"(\(\d{3}\)|\d{3}-)?\d{8}";

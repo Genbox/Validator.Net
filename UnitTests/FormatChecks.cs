@@ -60,23 +60,40 @@ namespace UnitTests
         public void PhoneNumberFormatCheck()
         {
             Assert.AreEqual(true, Validator.CheckPhoneNumber("0494778899", PhoneFormat.France));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("(022)22 22 22", PhoneFormat.Germany));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("03-1323-2334", PhoneFormat.Japan));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("234-14242424", PhoneFormat.China));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("555-383-3344", PhoneFormat.America));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("493 3227341", PhoneFormat.India));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("972-367087", PhoneFormat.Spain));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("+44 333 333 333", PhoneFormat.UnitedKingdom));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("(23)343-4343", PhoneFormat.Brazil));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("+31(0)235256677", PhoneFormat.Dutch));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("(02)12341234", PhoneFormat.Australia));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("2342523452", PhoneFormat.Israel));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("(038)8383748", PhoneFormat.NewZealand));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("+7(916)9985670", PhoneFormat.Russia));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("22737458", PhoneFormat.Invariant));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("023-55116", PhoneFormat.Sweden));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("3486543653", PhoneFormat.Italy));
-            Assert.AreEqual(true, Validator.CheckPhoneNumber("20293822", PhoneFormat.Denmark));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("04 94 77 88 99", PhoneFormat.France));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("0594 123 456", PhoneFormat.France));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("+594 594 123 456", PhoneFormat.France));
+            Assert.AreEqual(false, Validator.CheckPhoneNumber("1494778899", PhoneFormat.France));
+            Assert.AreEqual(false, Validator.CheckPhoneNumber("123456789", PhoneFormat.France));
+
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("(099)12 34 56", PhoneFormat.Germany));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("+49 (0) 123 456789", PhoneFormat.Germany));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("(031234) 111111", PhoneFormat.Germany));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("01211-1111111", PhoneFormat.Germany));
+            Assert.AreEqual(false, Validator.CheckPhoneNumber("1", PhoneFormat.Germany));
+
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("01-2345-6789", PhoneFormat.Japan));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("011-81-3-9999-9999", PhoneFormat.Japan));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("+81-3-9999-9999", PhoneFormat.Japan));
+            Assert.AreEqual(true, Validator.CheckPhoneNumber("82-486 1234", PhoneFormat.Japan));
+            Assert.AreEqual(false, Validator.CheckPhoneNumber("1", PhoneFormat.Japan));
+            Assert.AreEqual(false, Validator.CheckPhoneNumber("123456", PhoneFormat.Japan));
+
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("234-14242424", PhoneFormat.China));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("555-383-3344", PhoneFormat.America));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("493 3227341", PhoneFormat.India));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("972-367087", PhoneFormat.Spain));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("+44 333 333 333", PhoneFormat.UnitedKingdom));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("(23)343-4343", PhoneFormat.Brazil));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("+31(0)235256677", PhoneFormat.Dutch));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("(02)12341234", PhoneFormat.Australia));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("2342523452", PhoneFormat.Israel));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("(038)8383748", PhoneFormat.NewZealand));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("+7(916)9985670", PhoneFormat.Russia));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("22737458", PhoneFormat.Invariant));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("023-55116", PhoneFormat.Sweden));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("3486543653", PhoneFormat.Italy));
+            //Assert.AreEqual(true, Validator.CheckPhoneNumber("20293822", PhoneFormat.Denmark));
         }
 
         [TestMethod]

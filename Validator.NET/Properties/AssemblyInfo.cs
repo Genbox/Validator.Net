@@ -5,12 +5,12 @@ using System.Security;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Validator")]
+[assembly: AssemblyTitle("Validator.NET")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Validator")]
-[assembly: AssemblyCopyright("Copyright Ian Qvist ©  2007")]
+[assembly: AssemblyProduct("Validator.NET")]
+[assembly: AssemblyCopyright("Copyright Ian Qvist © 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AllowPartiallyTrustedCallers]
