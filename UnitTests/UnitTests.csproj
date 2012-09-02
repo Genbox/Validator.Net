@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttackChecks.cs" />
+    <Compile Include="TypeChecks.cs" />
     <Compile Include="NormalizingChecks.cs" />
     <Compile Include="LengthAndRangeChecks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

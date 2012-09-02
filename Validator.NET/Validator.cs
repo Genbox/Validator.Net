@@ -1,7 +1,6 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using ValidatorNET.Enums;
@@ -23,9 +22,11 @@ namespace ValidatorNET
         private static string[] _xssDangerousCharacters = { "'", ";", "!", "-", "=", "&", "{", "(", ")", "}", "#", "\"" };
         private static string[] _xssExtremelyDangerousStrings = { "fromcharcode", "script", "javascript", "object", ".js", "vbscript", "allowscriptaccess", "activex" };
         private static string[] _xssDangerousStrings = { "iframe", "object", "input", "dynsrc", "lowsrc", "size", "link", "href", "rel", "import", "moz-binding", "htc", "mocha", "livescript", "content", "embed", "src" };
-        private static Regex _whiteSpace = new Regex(@"[\c\r\n\t]");
-        private static Regex _findMultiSpaces = new Regex(@"[\ ]{2,}", RegexOptions.Multiline);
-        private static Regex _findHex = new Regex(@"\&\#x[0-9a-fA-F]{0,3}\;?|\%[0-9a-fA-F]{0,2}\;?");
+
+        private static Regex _whiteSpace = new Regex(@"[\c\r\n\t\0]", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private static Regex _findMultiSpaces = new Regex(@"[\ ]{2,}", RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private static Regex _findHex = new Regex(@"\&\#x[0-9a-fA-F]{0,3}\;?|\%[0-9a-fA-F]{0,2}\;?", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private static Regex _findUnicode = new Regex("\\&\\#(?:0000)?(\\d{3})", RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
         #region Common attack checks
 
@@ -123,7 +124,7 @@ namespace ValidatorNET
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        private static string NormalizeData(string data)
+        public static string NormalizeData(string data)
         {
             string temp = string.Empty;
 
@@ -142,9 +143,27 @@ namespace ValidatorNET
                 temp = ConvertHexToAscii(temp);
 
                 // Converts unicode to ansi characters
-                temp = EncodeUTF8ToASCII(temp);
+                temp = ConvertUnicode(temp);
             }
             return temp;
+        }
+
+        /// <summary>
+        /// Converts long and short format unicode to ASCII
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string ConvertUnicode(string input)
+        {
+            if (!string.IsNullOrEmpty(input))
+            {
+                foreach (Match match in _findUnicode.Matches(input))
+                {
+                    input = input.Replace(match.Value, Convert.ToString(Convert.ToChar(short.Parse(match.Groups[1].Value))));
+                }
+            }
+
+            return input;
         }
 
         /// <summary>
@@ -174,42 +193,6 @@ namespace ValidatorNET
         }
 
         /// <summary>
-        /// Encodes the ASCII string to UTF8.
-        /// </summary>
-        /// <param name="asciiInput">The ASCII input.</param>
-        /// <returns></returns>
-        public static string EncodeASCIToUTF8(string asciiInput)
-        {
-            if (!string.IsNullOrEmpty(asciiInput))
-            {
-                byte[] rawBytes = Encoding.ASCII.GetBytes(asciiInput);
-                byte[] unicodeBytes = Encoding.Convert(Encoding.ASCII, Encoding.UTF8, rawBytes);
-
-                return Encoding.Unicode.GetString(unicodeBytes);
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// Converts UTF8 string to ASCII
-        /// </summary>
-        /// <param name="unicodeInput"></param>
-        /// <returns></returns>
-        public static string EncodeUTF8ToASCII(string unicodeInput)
-        {
-            if (!string.IsNullOrEmpty(unicodeInput))
-            {
-                byte[] rawBytes = Encoding.Unicode.GetBytes(unicodeInput);
-                byte[] asciiBytes = Encoding.Convert(Encoding.UTF8, Encoding.ASCII, rawBytes);
-
-                return Encoding.ASCII.GetString(asciiBytes);
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
         /// Converts the hex input to a string in ASCII
         /// </summary>
         /// <param name="hexValue">The hex string.</param>
@@ -229,8 +212,11 @@ namespace ValidatorNET
                         matchValueCleaned = matchValueCleaned.Replace(c, ' ').Trim();
                     }
 
-                    char hexChar = (char)int.Parse(matchValueCleaned, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
-                    hexValue = hexValue.Replace(match.Value, hexChar.ToString(CultureInfo.InvariantCulture));
+                    if (!string.IsNullOrEmpty(matchValueCleaned))
+                    {
+                        char hexChar = (char)int.Parse(matchValueCleaned, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+                        hexValue = hexValue.Replace(match.Value, hexChar.ToString(CultureInfo.InvariantCulture));
+                    }
                 }
             }
 
@@ -448,7 +434,7 @@ namespace ValidatorNET
         /// <returns></returns>
         public static bool IsNumeric(string data)
         {
-            return data.All(char.IsDigit);
+            return !string.IsNullOrEmpty(data) && data.All(char.IsDigit);
         }
 
         /// <summary>
@@ -458,7 +444,7 @@ namespace ValidatorNET
         /// <returns></returns>
         public static bool IsAlphaNumeric(string data)
         {
-            return data.All(char.IsLetterOrDigit);
+            return !string.IsNullOrEmpty(data) && data.All(char.IsLetterOrDigit);
         }
 
         /// <summary>
@@ -468,7 +454,7 @@ namespace ValidatorNET
         /// <returns></returns>
         public static bool IsAlpha(string data)
         {
-            return data.All(char.IsLetter);
+            return !string.IsNullOrEmpty(data) && data.All(char.IsLetter);
         }
 
         #endregion
